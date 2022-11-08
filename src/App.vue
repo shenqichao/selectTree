@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <el-button @click="view">查看</el-button>
-    <selectTree size="mini" v-model="treeId" :rangeSeparator="rangeSeparator" :placeholder="placeholder" :width="width" :height="height" :defaultProps="defaultProps" :treeList="treeList" />
+    <selectTree size="medium" v-model="treeId" :rangeSeparator="rangeSeparator" :placeholder="placeholder" :width="width" :height="height" :defaultProps="defaultProps" :treeList="treeList" />
   </div>
 </template>
  

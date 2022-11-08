@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-popover :visible-arrow="false" trigger="focus" placement="bottom-start">
+    <el-popover :visible-arrow="false" trigger="focus" placement="bottom-start" @show="show" @hide="hide">
       <el-input
         :size="size"
         slot="reference"
@@ -12,12 +12,12 @@
       >
         <span slot="suffix">
           <i
-            class="el-icon-close"
+            class="el-icon-circle-close"
             v-show="text"
-            style="cursor: pointer"
+            style="cursor: pointer;font-weight: 600;"
             @click="clearChange"
           ></i>
-          <i class="el-icon-caret-bottom"></i>
+          <i class="el-icon-caret-bottom hide" :style="{transform:!rotating?' rotate(-180deg)':''}"></i>
         </span>
       </el-input>
       <div
@@ -86,6 +86,7 @@ export default {
   },
   data() {
     return {
+      rotating:true,
       //回显展开的tree节点
       expandedKeys: [],
       //定时器名称
@@ -98,6 +99,12 @@ export default {
     };
   },
   methods: {
+    show(){
+      this.rotating = false
+    },
+    hide(){
+      this.rotating = true
+    },
     categoryChange(val) {
       clearInterval(this.timmer);
       this.timmer = setInterval(() => {
@@ -119,14 +126,13 @@ export default {
     // 递归函数
     platform(node) {
       if (!node.parent) {
-        this.text = this.dataname.join(this.rangeSeparator);
+        this.text = this.dataname.join(' '+this.rangeSeparator+' ' );
         return;
       }
       this.dataname.unshift(node.data.label);
       this.platform(node.parent);
     },
     handleNodeClick(data, node) {
-      console.log(data);
       this.categoryShow = true;
       this.$emit('input',data[this.defaultProps.id])
       this.dataname = [];
@@ -137,4 +143,7 @@ export default {
 </script>
 
 <style>
+.hide{
+    transition: all .3s;
+  }
 </style>
