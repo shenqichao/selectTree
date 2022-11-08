@@ -4,7 +4,7 @@
     <selectTree size="mini" v-model="treeId" :rangeSeparator="rangeSeparator" :placeholder="placeholder" :width="width" :height="height" :defaultProps="defaultProps" :treeList="treeList" />
   </div>
 </template>
-
+ 
 
 <script>
 import selectTree from './components/selectTree.vue';
